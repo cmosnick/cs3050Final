@@ -5,7 +5,7 @@ int readFile(char * arg, vector<vector<int> > &arr);
 void printArray(vector<vector<int> > &arr);
 void printGrid(vector<vector<Grid *> > &arr);
 void initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &intArr);
-void fillGridArr(vector<vector<Grid *> > gridArr);
+Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr);
 int main(int argc, char *argv[])
 {
 	//check if file
@@ -22,12 +22,12 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	cout<<endl<<arr.size()<<endl<<arr[1].size()<<endl;
-	//send vector to be turned into a graph
 	//make a vector of pointers to grid objects
 	vector<vector<Grid *> > gridArr ;
 	initGridArr(gridArr, arr);
-	//fillGridArr(gridArr);
+	Grid* head = fillGridArr(gridArr, arr);
 
+	cout<<head<<endl;
 	return 1;
 }//end main
 
@@ -101,7 +101,7 @@ void initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &intArr)
 		{
 			Grid *newGrid = new Grid;
 			gridArr[i][j] = newGrid;
-			cout <<newGrid<<endl;
+			//cout <<newGrid<<endl;
 		}
 	}
 	//printGrid(gridArr);
@@ -119,14 +119,39 @@ void printGrid(vector<vector<Grid *> > &arr)
 			cout<<arr[r][c];
 		}
 	}
-	
 	return;
 }
 
 
-void fillGridArr(vector<vector<Grid *> > gridArr)
+Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr)
 {
+	int size, size2, r, c;
+	size = arr.size();
+	Grid *head = NULL;
+	for(r=0 ; r<size ; r++)
+	{
+		size2 = arr[r].size();
+		for(c=0 ; c<size2 ; c++){
+			//check upper bound
+			if(r>0 && c<arr[r-1].size()){	gridArr[r][c]->setFront(gridArr[r-1][c]);	}
+			else gridArr[r][c]->setFront(NULL);
 
+			//check lower bound
+			if(r<size && c<arr[r+1].size()){	gridArr[r][c]->setBack(gridArr[r+1][c]);	}
+			else gridArr[r][c]->setBack(NULL);
+			
+			//check left bound
+			if(c>0){	gridArr[r][c]->setLeft(gridArr[r][c-1]);	}
+			else gridArr[r][c]->setLeft(NULL);
+
+			//check right bound
+			if((c+1)< size2){	gridArr[r][c]->setRight(gridArr[r][c+1]);	}
+			else gridArr[r][c]->setRight(NULL);
+
+			if(arr[r][c] == 1) head = gridArr[r][c];
+		}
+	}
+	return head;
 }
 
 
