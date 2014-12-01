@@ -1,14 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#define MAX 	5000
-using namespace std;
+#include "import.cpp"
+#include "grid.h"
 
-
-int readFile(char * arg, vector<vector<int> > arr);
-void printArray(vector<vector<int> > arr, int rows, int cols);
+int readFile(char * arg, vector<vector<int> > &arr);
+void printArray(vector<vector<int> > &arr);
+void printGrid(vector<vector<Grid *> > &arr);
+void initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &intArr);
+void fillGridArr(vector<vector<Grid *> > gridArr);
 int main(int argc, char *argv[])
 {
 	//check if file
@@ -24,30 +21,33 @@ int main(int argc, char *argv[])
 		cerr<< "Could not open/parse file" <<endl;
 		return 0;
 	}
-
-	//cout<< endl<< START << endl <<END << endl << SPACE << endl << WALL <<endl;
+	cout<<endl<<arr.size()<<endl<<arr[1].size()<<endl;
 	//send vector to be turned into a graph
-
+	//make a vector of pointers to grid objects
+	vector<vector<Grid *> > gridArr ;
+	initGridArr(gridArr, arr);
+	//fillGridArr(gridArr);
 
 	return 1;
 }//end main
 
 
-void printArray(vector<vector<int> > arr, int rows, int cols)
+void printArray(vector<vector<int> > &arr)
 {
 	int r, c;
-	for(r=0; r<rows ; r++)
+	for(r=0; r<arr.size() ; r++)
 	{
 		cout << endl;
-		for(c=0; c<cols ; c++)
+		for(c=0; c<arr[r].size() ; c++)
 		{
 			cout<<arr[r][c];
 		}
 	}
+	
 	return;
 }
 
-int readFile(char * arg, vector<vector<int> > arr )
+int readFile(char * arg, vector<vector<int> > &arr )
 {
 	//readfile
 	ifstream file;
@@ -76,12 +76,61 @@ int readFile(char * arg, vector<vector<int> > arr )
 				case 'E': 	val = 3; 		break;
 				default: 	val = 2; 	break;
 			}
+
 			arr[row][i] = val;
 		}
+		arr[row].resize(i);
 		if(i > col) col = i;
 		row++;
 	}
-
-	printArray(arr, row, col);
+	arr.resize(row);
+	printArray(arr);
 	return 1;
 }
+
+void initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &intArr)
+{
+	int i, j, size2, size=intArr.size();
+	//cout<<size<<endl;
+	gridArr.resize(size);
+	for(i=0 ; i<size ; i++)
+	{
+		size2 = intArr[i].size();
+		gridArr[i].resize(size2);
+		for(j=0 ; j<size2 ; j++)
+		{
+			Grid *newGrid = new Grid;
+			gridArr[i][j] = newGrid;
+			cout <<newGrid<<endl;
+		}
+	}
+	//printGrid(gridArr);
+	return;
+}
+
+void printGrid(vector<vector<Grid *> > &arr)
+{
+	int r, c;
+	for(r=0; r<arr.size() ; r++)
+	{
+		cout << endl;
+		for(c=0; c<arr[r].size() ; c++)
+		{
+			cout<<arr[r][c];
+		}
+	}
+	
+	return;
+}
+
+
+void fillGridArr(vector<vector<Grid *> > gridArr)
+{
+
+}
+
+
+
+
+
+
