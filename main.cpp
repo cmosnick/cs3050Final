@@ -22,9 +22,9 @@ int main(int argc, char *argv[]){
 	Grid* head = fillGridArr(gridArr, arr);
 	printGridArr(gridArr);
 
-	//Make a vector for adjacency list
-	vector<vector<Grid*> > adjList;
-	createAdjList(adjList, gridArr, count);
+	//Make a vector for adjacency list, solely for the purpose of showing file was read in correctly
+	//vector<vector<Grid*> > adjList;
+	//createAdjList(adjList, gridArr, count);
 	//printAdjList(adjList);
 
 	//Find optimal solution

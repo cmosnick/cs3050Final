@@ -22,25 +22,25 @@
 		//Look to Front
 		if(node->front == NULL) fres = INFINITY;
 		else if(node->front != NULL && node->front->number != senderNode){
-			printf("\n(%d->%d)", node->number, node->front->number);
+			//printf("\n(%d->%d)", node->number, node->front->number);
 			fres = optSoln(node->front, node->number);
 		} else fres = INFINITY;
 		//Look to Back
 		if(node->back == NULL) bres = INFINITY;
 		else if(node->back != NULL && node->back->number != senderNode){
-			printf("\n(%d->%d)", node->number, node->back->number);
+			//printf("\n(%d->%d)", node->number, node->back->number);
 			bres = optSoln(node->back, node->number);
 		}else bres = INFINITY;
 		//Look to Left
 		if(node->left == NULL) lres = INFINITY;
 		else if(node->left != NULL && node->left->number != senderNode){
-			printf("\n(%d->%d)", node->number, node->left->number);
+			//printf("\n(%d->%d)", node->number, node->left->number);
 			lres = optSoln(node->left, node->number);
 		}else lres = INFINITY;
 		//Look to Right
 		if(node->right == NULL) rres = INFINITY;
 		else if(node->right != NULL && node->right->number != senderNode){
-			printf("\n(%d->%d)", node->number, node->right->number);
+			//printf("\n(%d->%d)", node->number, node->right->number);
 			rres = optSoln(node->right, node->number);
 		}else rres = INFINITY;
 
@@ -82,11 +82,16 @@
 		int temp = INFINITY;
 		if(head->opt == temp) return;
 		//Mark it as part of path
-		printf("\nChanging value of node %d to 4.", head->number);
-		if(head->type != 1)	head->type = 4;
-		Grid *next = findMin(head->front, head->back, head->right, head->left, head);
-		printPath(next);
-	}
+			//printf("\nChanging value of node %d to 4.", head->number);
+			//if(head->type != 1)	head->type = 4;
+			//Grid *next = findMin(head->front, head->back, head->right, head->left, head);
+			//if (next != NULL) printf("\n(%d->%d)", head->number, next->number);
+		if(head->front != NULL && head->front->opt == head->opt-1) printPath(head->front);
+		else if(head->back != NULL && head->back->opt == head->opt-1) printPath(head->back);
+		else if(head->left != NULL && head->left->opt == head->opt-1) printPath(head->left);
+		else if(head->right != NULL && head->right->opt == head->opt-1) printPath(head->right);
+		else return;
+}
 
 
 
