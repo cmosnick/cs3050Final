@@ -8,6 +8,7 @@
 #include <vector>
 #include <iomanip>
 #include <cmath>
+#include <limits> 
 #define MAX 	5000
 #define ANSI_RED     "\x1b[31m"
 #define ANSI_GREEN   "\x1b[32m"
