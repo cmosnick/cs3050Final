@@ -17,7 +17,7 @@
 	char Grid::getType(){return type;}
 
 	int Grid::optSoln(Grid *node, int senderNode){
-		int fres, bres, lres, rres, temp = INFINITY, temp2 = INFINITY; temp2++;
+		int fres, bres, lres, rres, temp = (int)INFINITY, temp2 = (int)INFINITY; temp2++;
 		//Check base case: null, at end, or still working on optimization (to prevent loops)
 		if(node == NULL) return -1;
 		if(node->type == 'E') return 1;
@@ -70,7 +70,7 @@
 
 	void Grid::printPath(Grid *head){
 		if(head == NULL) return;
-		int temp = INFINITY;
+		int temp = (int)INFINITY;
 		if(head->opt == temp) return;
 		//Mark it as part of path
 		if(head->type != 'S')	head->type = '@';
