@@ -82,15 +82,15 @@
 		int temp = INFINITY;
 		if(head->opt == temp) return;
 		//Mark it as part of path
-			//printf("\nChanging value of node %d to 4.", head->number);
-			//if(head->type != 1)	head->type = 4;
+		printf("\nChanging value of node %d to 4.", head->number);
+		if(head->type != 1)	head->type = 4;
 			//Grid *next = findMin(head->front, head->back, head->right, head->left, head);
 			//if (next != NULL) printf("\n(%d->%d)", head->number, next->number);
 		if(head->front != NULL && head->front->opt == head->opt-1) printPath(head->front);
-		else if(head->back != NULL && head->back->opt == head->opt-1) printPath(head->back);
-		else if(head->left != NULL && head->left->opt == head->opt-1) printPath(head->left);
-		else if(head->right != NULL && head->right->opt == head->opt-1) printPath(head->right);
-		else return;
+		if(head->back != NULL && head->back->opt == head->opt-1) printPath(head->back);
+		if(head->left != NULL && head->left->opt == head->opt-1) printPath(head->left);
+		if(head->right != NULL && head->right->opt == head->opt-1) printPath(head->right);
+		return;
 }
 
 

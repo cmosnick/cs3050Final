@@ -114,7 +114,7 @@ void printGridArr(vector<vector<Grid *> > &arr){
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
 		for(c=0; c<arr[r].size() ; c++){
-			printf("%5d",arr[r][c]->type);
+			printf("%2d",arr[r][c]->type);
 		}
 	}
 	return;
