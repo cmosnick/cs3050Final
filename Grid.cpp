@@ -1,7 +1,7 @@
 #include "Grid.h"
 	
 	Grid::Grid(){};
-	Grid::Grid(int val, char passed_type){	number = val;	type = passed_type;	opt = (int)INFINITY;	optStatus = 0;}
+	Grid::Grid(int val, char passed_type){	number = val;	type = passed_type;	opt = numeric_limits<int>::max();	optStatus = 0;}
 	void Grid::setLeft(Grid *grid){		left = grid;	}
 	void Grid::setRight(Grid *grid){	right = grid;	}
 	void Grid::setFront(Grid *grid){	front = grid;	}
@@ -17,7 +17,7 @@
 	char Grid::getType(){return type;}
 
 	int Grid::optSoln(Grid *node, int senderNode){
-		int fres, bres, lres, rres, temp = (int)INFINITY, temp2 = (int)INFINITY; temp2++;
+		int fres, bres, lres, rres, temp = numeric_limits<int>::max(), temp2 = numeric_limits<int>::max(); temp2++;
 		//Check base case: null, at end, or still working on optimization (to prevent loops)
 		if(node == NULL) return -1;
 		if(node->type == 'E') return 1;
@@ -29,25 +29,25 @@
 
 		node->optStatus ++; //change node status to odd
 		//Look to Front
-		if(node->front == NULL) fres = (int)INFINITY;
+		if(node->front == NULL) fres = numeric_limits<int>::max();
 		else if(node->front != NULL && node->front->number != senderNode){
 			fres = optSoln(node->front, node->number);
-		} else fres = (int)INFINITY;
+		} else fres = numeric_limits<int>::max();
 		//Look to Back
-		if(node->back == NULL) bres =(int) INFINITY;
+		if(node->back == NULL) bres =numeric_limits<int>::max();
 		else if(node->back != NULL && node->back->number != senderNode){
 			bres = optSoln(node->back, node->number);
-		}else bres = (int)INFINITY;
+		}else bres = numeric_limits<int>::max();
 		//Look to Left
-		if(node->left == NULL) lres = (int)INFINITY;
+		if(node->left == NULL) lres = numeric_limits<int>::max();
 		else if(node->left != NULL && node->left->number != senderNode){
 			lres = optSoln(node->left, node->number);
-		}else lres = (int)INFINITY;
+		}else lres = numeric_limits<int>::max();
 		//Look to Right
-		if(node->right == NULL) rres = (int)INFINITY;
+		if(node->right == NULL) rres = numeric_limits<int>::max();
 		else if(node->right != NULL && node->right->number != senderNode){
 			rres = optSoln(node->right, node->number);
-		}else rres = (int)INFINITY;
+		}else rres = numeric_limits<int>::max();
 
 		//Find min
 		int min = findMin(fres, bres, lres, rres, node->opt);
@@ -70,7 +70,7 @@
 
 	void Grid::printPath(Grid *head){
 		if(head == NULL) return;
-		int temp = (int)INFINITY;
+		int temp = numeric_limits<int>::max();
 		if(head->opt == temp) return;
 		//Mark it as part of path
 		if(head->type != 'S')	head->type = '@';
