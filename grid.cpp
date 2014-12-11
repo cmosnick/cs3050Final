@@ -6,6 +6,15 @@
 	void Grid::setRight(Grid *grid){	right = grid;	}
 	void Grid::setFront(Grid *grid){	front = grid;	}
 	void Grid::setBack(Grid *grid){		back = grid;	}
+	Grid* Grid::getLeft(){return left;}
+	Grid* Grid::getRight(){return right;}
+	Grid* Grid::getFront(){return front;}
+	Grid* Grid::getBack(){return back;}
+
+	int Grid::getNumber(){return number;}
+	int Grid::getOpt(){return opt;}
+	int Grid::getOptStatus(){return optStatus;}
+	char Grid::getType(){return type;}
 
 	int Grid::optSoln(Grid *node, int senderNode){
 		int fres, bres, lres, rres, temp = INFINITY, temp2 = INFINITY; temp2++;

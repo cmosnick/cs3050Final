@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
 		*/
 
 	//Find optimal solution
-	int soln = Grid::optSoln(head, head->number);
+	int soln = Grid::optSoln(head, head->getNumber());
 	int temp = INFINITY;
 	if(soln == -1 || soln == temp){
 		cout<<endl<<"End not found :("<<endl;

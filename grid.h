@@ -3,13 +3,14 @@
 #include "import.cpp"
 class Grid
 {
-	public:
+	
 		Grid *left, *right, *front, *back;
-		bool visited;
+		//bool visited;
+		//opt status is to prevent loops in the optimization.  0 not found, 1 is working on it, 2 is finished.
  		int number, opt, optStatus;
  		char type;
- 		//opt status is to prevent loops in the optimization.  0 not found, 1 is working on it, 2 is finished.
- 	
+ 		
+ 	public:
 		Grid(int val, char passed_type);
 		Grid();
 
@@ -21,6 +22,16 @@ class Grid
 
 		void setBack(Grid *grid);
 
+		Grid *getLeft();
+		Grid *getRight();
+		Grid *getFront();
+		Grid *getBack();
+
+		int getNumber();
+		int getOpt();
+		int getOptStatus();
+		char getType();
+		
 		static int optSoln(Grid *node, int senderNode);
 		static void printPath(Grid *head);
 

@@ -72,7 +72,7 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
 		size2 = arr[r].size();
 		for(c=0 ; c<size2 ; c++){
 			//Check if node is a wall
-			if(gridArr[r][c]->type == '#'){	
+			if(gridArr[r][c]->getType() == '#'){	
 				gridArr[r][c]->setFront(NULL);
 				gridArr[r][c]->setBack(NULL);
 				gridArr[r][c]->setLeft(NULL);
@@ -105,10 +105,10 @@ void printGridArr(vector<vector<Grid *> > &arr){
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
 		for(c=0; c<arr[r].size() ; c++){
-			if(arr[r][c]->type == 'S') printf(ANSI_GREEN "%c" ANSI_RESET ,arr[r][c]->type);
-			else if(arr[r][c]->type == 'E') printf(ANSI_RED "%c" ANSI_RESET ,arr[r][c]->type);
-			else if(arr[r][c]->type == '@') printf(ANSI_BLUE "%c" ANSI_RESET ,arr[r][c]->type);
-			else printf("%c",arr[r][c]->type);
+			if(arr[r][c]->getType() == 'S') printf(ANSI_GREEN "%c" ANSI_RESET ,arr[r][c]->getType());
+			else if(arr[r][c]->getType() == 'E') printf(ANSI_RED "%c" ANSI_RESET ,arr[r][c]->getType());
+			else if(arr[r][c]->getType() == '@') printf(ANSI_BLUE "%c" ANSI_RESET ,arr[r][c]->getType());
+			else printf("%c",arr[r][c]->getType());
 		}
 	}
 	return;
@@ -129,10 +129,10 @@ void createAdjList(vector<vector<Grid *> > &adjList, vector<vector<Grid *> > &gr
 			//assign grid object to adj list, assign all adjacent nodes
 			adjList[count].resize(5);
 			adjList[count][0] = gridArr[i][j];
-			if(gridArr[i][j]->left != NULL){	adjList[count][count2]=gridArr[i][j]->left; count2++;}
-			if(gridArr[i][j]->right != NULL){	adjList[count][count2]=gridArr[i][j]->right; count2++;}
-			if(gridArr[i][j]->front != NULL){	adjList[count][count2]=gridArr[i][j]->front; count2++;}
-			if(gridArr[i][j]->back != NULL){	adjList[count][count2]=gridArr[i][j]->back; count2++;}
+			if(gridArr[i][j]->getLeft() != NULL){	adjList[count][count2]=gridArr[i][j]->getLeft(); count2++;}
+			if(gridArr[i][j]->getRight() != NULL){	adjList[count][count2]=gridArr[i][j]->getRight(); count2++;}
+			if(gridArr[i][j]->getFront() != NULL){	adjList[count][count2]=gridArr[i][j]->getFront(); count2++;}
+			if(gridArr[i][j]->getBack() != NULL){	adjList[count][count2]=gridArr[i][j]->getBack(); count2++;}
 			adjList[count].resize(count2);	count2=1;	count++;
 		}
 	}	
@@ -143,9 +143,9 @@ void printAdjList(vector<vector<Grid*> > &adjList){
 	cout<<endl<<"Adjacecny List:"<<endl;
 	for(i=0 ; i<size ; i++){
 		size2 = adjList[i].size();
-		cout<<setw(5)<<left<<adjList[i][0]->number<<"| ";
+		cout<<setw(5)<<left<<adjList[i][0]->getNumber()<<"| ";
 		for(j=1 ; j<size2 ;j++){
-			cout<<setw(5)<<left<<adjList[i][j]->number;
+			cout<<setw(5)<<left<<adjList[i][j]->getNumber();
 		}
 		cout<<endl;
 	}
