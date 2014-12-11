@@ -27,11 +27,16 @@ int main(int argc, char *argv[]){
 	createAdjList(adjList, gridArr, count);
 	//printAdjList(adjList);
 
-	//Call OptSoln from head
-	int soln = head->optSoln(head, head->number);
+	//Find optimal solution
+	int soln = Grid::optSoln(head, head->number);
+	if(soln == -1){
+		cout<<endl<<"End not found :("<<endl;
+		return 0;
+	}
+
 	cout<<endl<<"Shortest path is: "<<soln<<endl;
 
-	/*soln = head->optSoln(head, head->number);
-	cout<<endl<<"Shortest path is: "<<soln<<endl; */
+	Grid::printPath(head);
+	printGridArr(gridArr);
 	return 1;
 }//end main

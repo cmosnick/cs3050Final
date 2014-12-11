@@ -20,9 +20,11 @@ class Grid
 
 		void setBack(Grid *grid);
 
-		int optSoln(Grid *node, int senderNode);
+		static int optSoln(Grid *node, int senderNode);
+		static void printPath(Grid *head);
 
 	private:
-		int findMin(int num1, int num2, int num3, int num4, int curr);
+		static int findMin(int num1, int num2, int num3, int num4, int curr);
+		static Grid* findMin(Grid *n1, Grid *n2, Grid *n3, Grid *n4, Grid *head);
 };
 #endif
