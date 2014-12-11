@@ -70,7 +70,7 @@
 		if(head->left != NULL && head->left->opt == head->opt-1) printPath(head->left);
 		if(head->right != NULL && head->right->opt == head->opt-1) printPath(head->right);
 		return;
-}
+	}
 
 
 

@@ -14,7 +14,7 @@ void printArray(vector<vector<char> > &arr){
 
 int readFile(char * arg, vector<vector<char> > &arr ){
 	//Vars
-	int row=0, val, col=0, len, i;
+	int row=0, col=0, len, i;
 	string str, line;
 	ifstream file;
 
@@ -43,14 +43,12 @@ int readFile(char * arg, vector<vector<char> > &arr ){
 	}
 	//resize vector to row, number of rows (vectors) in main vector
 	arr.resize(row);
-	//printArray(arr);
 	return 1;
 }
 
 //Use vector array to initilize the grid array's size and values
 int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr){
 	int i, j, size2, size=intArr.size(), count=0;
-	//cout<<size<<endl;
 	gridArr.resize(size);
 	for(i=0 ; i<size ; i++){
 		size2 = intArr[i].size();
@@ -62,7 +60,6 @@ int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr)
 			count++;
 		}
 	}
-	//printGridArr(gridArr);
 	return count;
 }
 
@@ -128,7 +125,6 @@ void createAdjList(vector<vector<Grid *> > &adjList, vector<vector<Grid *> > &gr
 
 	for(i=0 ; i<size ; i++){
 		size2 = gridArr[i].size();
-			//cout<<"In first for loop:  "<<i<<endl;
 		for(j=0 ; j<size2 ; j++){
 			//assign grid object to adj list, assign all adjacent nodes
 			adjList[count].resize(5);
