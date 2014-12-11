@@ -2,7 +2,7 @@
 
 
 void printArray(vector<vector<char> > &arr){
-	int r, c;
+	signed int r, c;
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
 		for(c=0; c<arr[r].size() ; c++){
@@ -65,7 +65,7 @@ int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr)
 
 
 Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
-	int size, size2, r, c;
+	signed int size, size2, r, c;
 	size = arr.size();
 	Grid *head = NULL;
 	for(r=0 ; r<size ; r++){
@@ -101,7 +101,7 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
 
 
 void printGridArr(vector<vector<Grid *> > &arr){
-	int r, c;
+	signed int r, c;
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
 		for(c=0; c<arr[r].size() ; c++){
