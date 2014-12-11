@@ -108,7 +108,10 @@ void printGridArr(vector<vector<Grid *> > &arr){
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
 		for(c=0; c<arr[r].size() ; c++){
-			printf("%c",arr[r][c]->type);
+			if(arr[r][c]->type == 'S') printf(ANSI_GREEN "%c" ANSI_RESET ,arr[r][c]->type);
+			else if(arr[r][c]->type == 'E') printf(ANSI_RED "%c" ANSI_RESET ,arr[r][c]->type);
+			else if(arr[r][c]->type == '@') printf(ANSI_BLUE "%c" ANSI_RESET ,arr[r][c]->type);
+			else printf("%c",arr[r][c]->type);
 		}
 	}
 	return;
