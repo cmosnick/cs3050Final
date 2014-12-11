@@ -1,7 +1,7 @@
 #include "Grid.h"
 	
 	Grid::Grid(){};
-	Grid::Grid(int val, char passed_type){	number = val;	type = passed_type;	opt = INFINITY;	optStatus = 0;}
+	Grid::Grid(int val, char passed_type){	number = val;	type = passed_type;	opt = (int)INFINITY;	optStatus = 0;}
 	void Grid::setLeft(Grid *grid){		left = grid;	}
 	void Grid::setRight(Grid *grid){	right = grid;	}
 	void Grid::setFront(Grid *grid){	front = grid;	}
@@ -29,25 +29,25 @@
 
 		node->optStatus ++; //change node status to odd
 		//Look to Front
-		if(node->front == NULL) fres = INFINITY;
+		if(node->front == NULL) fres = (int)INFINITY;
 		else if(node->front != NULL && node->front->number != senderNode){
 			fres = optSoln(node->front, node->number);
-		} else fres = INFINITY;
+		} else fres = (int)INFINITY;
 		//Look to Back
-		if(node->back == NULL) bres = INFINITY;
+		if(node->back == NULL) bres =(int) INFINITY;
 		else if(node->back != NULL && node->back->number != senderNode){
 			bres = optSoln(node->back, node->number);
-		}else bres = INFINITY;
+		}else bres = (int)INFINITY;
 		//Look to Left
-		if(node->left == NULL) lres = INFINITY;
+		if(node->left == NULL) lres = (int)INFINITY;
 		else if(node->left != NULL && node->left->number != senderNode){
 			lres = optSoln(node->left, node->number);
-		}else lres = INFINITY;
+		}else lres = (int)INFINITY;
 		//Look to Right
-		if(node->right == NULL) rres = INFINITY;
+		if(node->right == NULL) rres = (int)INFINITY;
 		else if(node->right != NULL && node->right->number != senderNode){
 			rres = optSoln(node->right, node->number);
-		}else rres = INFINITY;
+		}else rres = (int)INFINITY;
 
 		//Find min
 		int min = findMin(fres, bres, lres, rres, node->opt);
