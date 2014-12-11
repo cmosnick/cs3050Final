@@ -1,7 +1,7 @@
 #include "fileInput.h"
 
 
-void printArray(vector<vector<int> > &arr){
+void printArray(vector<vector<char> > &arr){
 	int r, c;
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
@@ -12,7 +12,7 @@ void printArray(vector<vector<int> > &arr){
 	return;
 }
 
-int readFile(char * arg, vector<vector<int> > &arr ){
+int readFile(char * arg, vector<vector<char> > &arr ){
 	//Vars
 	int row=0, val, col=0, len, i;
 	string str, line;
@@ -33,13 +33,8 @@ int readFile(char * arg, vector<vector<int> > &arr ){
 		len = str.size();
 		//Iterate through line char by char, assign to vector
 		for(i=0 ; i<len ; i++){
-			switch(str[i]){
-				case '#': 	val = 0; 	break;
-				case 'S':	val = 1; 	break;
-				case 'E': 	val = 3; 	break;
-				default: 	val = 2; 	break;
-			}
-			arr[row][i] = val;
+			if(str[i]=='#' || str[i]=='S' || str[i]=='E')	arr[row][i] = str[i];
+			else arr[row][i] = ' ';
 		}
 		//resize whole row to i, number of elements in row
 		arr[row].resize(i);
@@ -53,7 +48,7 @@ int readFile(char * arg, vector<vector<int> > &arr ){
 }
 
 //Use vector array to initilize the grid array's size and values
-int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &intArr){
+int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr){
 	int i, j, size2, size=intArr.size(), count=0;
 	//cout<<size<<endl;
 	gridArr.resize(size);
@@ -72,7 +67,7 @@ int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &intArr){
 }
 
 
-Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr){
+Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
 	int size, size2, r, c;
 	size = arr.size();
 	Grid *head = NULL;
@@ -80,28 +75,28 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr){
 		size2 = arr[r].size();
 		for(c=0 ; c<size2 ; c++){
 			//Check if node is a wall
-			if(gridArr[r][c]->type ==0){	
+			if(gridArr[r][c]->type == '#'){	
 				gridArr[r][c]->setFront(NULL);
 				gridArr[r][c]->setBack(NULL);
 				gridArr[r][c]->setLeft(NULL);
 				gridArr[r][c]->setRight(NULL);	
 			}else{
 				//check upper bound
-				if(r>0 && c<arr[r-1].size() && arr[r-1][c]!=0){		gridArr[r][c]->setFront(gridArr[r-1][c]);	}
+				if(r>0 && c<arr[r-1].size() && arr[r-1][c]!='#'){		gridArr[r][c]->setFront(gridArr[r-1][c]);	}
 				else 											gridArr[r][c]->setFront(NULL);
 				//check lower bound
-				if(r<size && c<arr[r+1].size() && arr[r+1][c]!=0){	gridArr[r][c]->setBack(gridArr[r+1][c]);	}
+				if(r<size && c<arr[r+1].size() && arr[r+1][c]!='#'){	gridArr[r][c]->setBack(gridArr[r+1][c]);	}
 				else 											gridArr[r][c]->setBack(NULL);
 				//check left bound
-				if(c>0 && arr[r][c-1]!=0){							gridArr[r][c]->setLeft(gridArr[r][c-1]);	}
+				if(c>0 && arr[r][c-1]!='#'){							gridArr[r][c]->setLeft(gridArr[r][c-1]);	}
 				else 											gridArr[r][c]->setLeft(NULL);
 				//check right bound
-				if((c+1)< size2 && arr[r][c+1]!=0){					gridArr[r][c]->setRight(gridArr[r][c+1]);	}
+				if((c+1)< size2 && arr[r][c+1]!='#'){					gridArr[r][c]->setRight(gridArr[r][c+1]);	}
 				else 											gridArr[r][c]->setRight(NULL);
 			}
 
 			//Check if head, or start
-			if(arr[r][c] == 1) head = gridArr[r][c];
+			if(arr[r][c] == 'S') head = gridArr[r][c];
 		}
 	}
 	return head;
@@ -110,11 +105,10 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr){
 
 void printGridArr(vector<vector<Grid *> > &arr){
 	int r, c;
-	cout<<endl<<"Grid Array:"<<endl;
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
 		for(c=0; c<arr[r].size() ; c++){
-			printf("%2d",arr[r][c]->type);
+			printf("%c",arr[r][c]->type);
 		}
 	}
 	return;
