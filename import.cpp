@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <iomanip>
+#include <cmath>
 #define MAX 	5000
 using namespace std;
 

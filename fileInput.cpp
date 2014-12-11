@@ -36,7 +36,7 @@ int readFile(char * arg, vector<vector<int> > &arr ){
 			switch(str[i]){
 				case '#': 	val = 0; 	break;
 				case 'S':	val = 1; 	break;
-				case 'E': 	val = 3; 		break;
+				case 'E': 	val = 3; 	break;
 				default: 	val = 2; 	break;
 			}
 			arr[row][i] = val;
@@ -71,18 +71,6 @@ int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &intArr){
 	return count;
 }
 
-void printGridArr(vector<vector<Grid *> > &arr){
-	int r, c;
-	cout<<endl<<"Grid Array:"<<endl;
-	for(r=0; r<arr.size() ; r++){
-		cout << endl;
-		for(c=0; c<arr[r].size() ; c++){
-			cout<<arr[r][c]->type;
-		}
-	}
-	return;
-}
-
 
 Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr){
 	int size, size2, r, c;
@@ -91,21 +79,26 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr){
 	for(r=0 ; r<size ; r++){
 		size2 = arr[r].size();
 		for(c=0 ; c<size2 ; c++){
-			//check upper bound
-			if(r>0 && c<arr[r-1].size() && arr[r-1][c]!=0){	gridArr[r][c]->setFront(gridArr[r-1][c]);	}
-			else gridArr[r][c]->setFront(NULL);
-
-			//check lower bound
-			if(r<size && c<arr[r+1].size() && arr[r+1][c]!=0){	gridArr[r][c]->setBack(gridArr[r+1][c]);	}
-			else gridArr[r][c]->setBack(NULL);
-			
-			//check left bound
-			if(c>0 && arr[r][c-1]!=0){	gridArr[r][c]->setLeft(gridArr[r][c-1]);	}
-			else gridArr[r][c]->setLeft(NULL);
-
-			//check right bound
-			if((c+1)< size2 && arr[r][c+1]!=0){	gridArr[r][c]->setRight(gridArr[r][c+1]);	}
-			else gridArr[r][c]->setRight(NULL);
+			//Check if node is a wall
+			if(gridArr[r][c]->type ==0){	
+				gridArr[r][c]->setFront(NULL);
+				gridArr[r][c]->setBack(NULL);
+				gridArr[r][c]->setLeft(NULL);
+				gridArr[r][c]->setRight(NULL);	
+			}else{
+				//check upper bound
+				if(r>0 && c<arr[r-1].size() && arr[r-1][c]!=0){		gridArr[r][c]->setFront(gridArr[r-1][c]);	}
+				else 											gridArr[r][c]->setFront(NULL);
+				//check lower bound
+				if(r<size && c<arr[r+1].size() && arr[r+1][c]!=0){	gridArr[r][c]->setBack(gridArr[r+1][c]);	}
+				else 											gridArr[r][c]->setBack(NULL);
+				//check left bound
+				if(c>0 && arr[r][c-1]!=0){							gridArr[r][c]->setLeft(gridArr[r][c-1]);	}
+				else 											gridArr[r][c]->setLeft(NULL);
+				//check right bound
+				if((c+1)< size2 && arr[r][c+1]!=0){					gridArr[r][c]->setRight(gridArr[r][c+1]);	}
+				else 											gridArr[r][c]->setRight(NULL);
+			}
 
 			//Check if head, or start
 			if(arr[r][c] == 1) head = gridArr[r][c];
@@ -113,6 +106,20 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<int> > &arr){
 	}
 	return head;
 }
+
+
+void printGridArr(vector<vector<Grid *> > &arr){
+	int r, c;
+	cout<<endl<<"Grid Array:"<<endl;
+	for(r=0; r<arr.size() ; r++){
+		cout << endl;
+		for(c=0; c<arr[r].size() ; c++){
+			printf("%5d",arr[r][c]->number);
+		}
+	}
+	return;
+}
+
 
 /*Adjlist vector will be a 2D vector of pointers to grid nodes.  
 The first grid object in each secondary vector will be the grid node.  

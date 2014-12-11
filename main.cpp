@@ -25,7 +25,13 @@ int main(int argc, char *argv[]){
 	//Make a vector for adjacency list
 	vector<vector<Grid*> > adjList;
 	createAdjList(adjList, gridArr, count);
-	printAdjList(adjList);
+	//printAdjList(adjList);
 
+	//Call OptSoln from head
+	int soln = head->optSoln(head, head->number);
+	cout<<endl<<"Shortest path is: "<<soln<<endl;
+
+	/*soln = head->optSoln(head, head->number);
+	cout<<endl<<"Shortest path is: "<<soln<<endl; */
 	return 1;
 }//end main
