@@ -65,7 +65,7 @@ int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr)
 
 
 Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
-	unsigned int size, size2, r, c;
+	unsigned size, size2, r, c;
 	size = arr.size();
 	Grid *head = NULL;
 	for(r=0 ; r<size ; r++){
