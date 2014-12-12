@@ -66,11 +66,11 @@ int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr)
 
 Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
 	size_t size, size2, r, c;
-	size = arr.size();
+	size = arr.size()-1;
 	Grid *head = NULL;
-	for(r=0 ; r<size ; r++){
-		size2 = arr[r].size();
-		for(c=0 ; c<size2 ; c++){
+	for(r=0 ; r<arr.size()-1 ; r++){
+		size2 = arr[r].size()-1;
+		for(c=0 ; c<arr[r].size()-1 ; c++){
 			//Check if node is a wall
 			if(gridArr[r][c]->getType() == '#'){	
 				gridArr[r][c]->setFront(NULL);
@@ -93,7 +93,7 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
 			}
 
 			//Check if head, or start
-			if(arr[r][c] == 'S') head = gridArr[r][c];
+			if(gridArr[r][c]->getType() == 'S') head = gridArr[r][c];
 		}
 	}
 	return head;
@@ -101,7 +101,7 @@ Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
 
 
 void printGridArr(vector<vector<Grid *> > &arr){
-	unsigned int r, c;
+	size_t r, c;
 	for(r=0; r<arr.size() ; r++){
 		cout << endl;
 		for(c=0; c<arr[r].size() ; c++){
