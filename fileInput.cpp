@@ -49,9 +49,9 @@ int readFile(char * arg, vector<vector<char> > &arr ){
 //Use vector array to initilize the grid array's size and values
 int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr){
 	int i, j, size2, size=intArr.size(), count=0;
-	gridArr.resize(size+1);
+	gridArr.resize(size);
 	for(i=0 ; i<size ; i++){
-		size2 = intArr[i].size()+1;
+		size2 = intArr[i].size();
 		gridArr[i].resize(size2);
 		for(j=0 ; j<size2 ; j++){
 			//Create new Grid object, init its sequence number and type
