@@ -66,11 +66,11 @@ int initGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &intArr)
 
 Grid* fillGridArr(vector<vector<Grid *> > &gridArr, vector<vector<char> > &arr){
 	size_t size, size2, r, c;
-	size = arr.size()-1;
+	size = arr.size();
 	Grid *head = NULL;
-	for(r=0 ; r<arr.size()-1 ; r++){
-		size2 = arr[r].size()-1;
-		for(c=0 ; c<arr[r].size()-1 ; c++){
+	for(r=0 ; r<arr.size() ; r++){
+		size2 = arr[r].size();
+		for(c=0 ; c<arr[r].size() ; c++){
 			//Check if node is a wall
 			if(gridArr[r][c]->getType() == '#'){	
 				gridArr[r][c]->setFront(NULL);
